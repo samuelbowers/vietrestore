@@ -10,13 +10,15 @@
 :root{font-family:Arial,Helvetica,sans-serif;color:#233d34;background:#f4f5ef;font-synthesis:none}*{box-sizing:border-box}body{margin:0}header{height:90px;background:#fff;border-bottom:1px solid #dce3d9;display:flex;align-items:center;justify-content:space-between;padding:0 36px}.brand{display:flex;gap:13px;align-items:center}.mark{height:43px;width:43px;background:#214e40;border-radius:12px;display:grid;place-items:center;color:#d6e9b4;font-size:29px}.brand h1{font-size:24px;letter-spacing:-1px;margin:0 0 5px}.brand p{font-size:12px;margin:0;color:#65776d}.pill{font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 13px;border:1px solid #d5dfd2;border-radius:30px;white-space:nowrap}.pill:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#b68740;margin-right:8px}
 body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}header{flex-shrink:0}main{flex:1;min-height:0;position:relative}#map{width:100%;height:100%;background:#203b36}.map-status{position:absolute;z-index:1000;top:16px;left:60px;right:16px;width:fit-content;max-width:calc(100% - 76px);padding:12px 16px;background:#fff;border-radius:8px;font-size:12px;box-shadow:0 2px 12px #0002}.map-status[hidden]{display:none}.leaflet-control-attribution{font-size:10px}.leaflet-container{font-family:Arial,Helvetica,sans-serif}.leaflet-bar a{color:#214e40}.leaflet-container:focus-visible{outline:3px solid #b6d997;outline-offset:-3px}@media(max-width:700px){header{height:auto;min-height:88px;padding:18px;gap:12px}.brand h1{font-size:22px}.brand p{max-width:185px;font-size:10px}.pill{font-size:8px;padding:8px}}
 .forest-status{top:62px}.forest-tooltip{white-space:normal;max-width:min(300px,70vw);font-size:12px;line-height:1.5;padding:9px 12px;color:#233d34;border-radius:6px}.leaflet-control-layers{border:1px solid #d5dfd2!important;border-radius:8px!important;color:#233d34}.leaflet-control-layers label{padding:5px}
+.landcover-image{image-rendering:pixelated}.comparison-status{top:110px}.leaflet-control-layers{max-width:260px}.leaflet-control-layers label{font-size:12px}
 </style></head><body>
-<header><div class="brand"><div class="mark" aria-hidden="true">↗</div><div><h1>VietRestore</h1><p>Vietnam restoration opportunity explorer</p></div></div><span class="pill">In development</span></header>
+<header><div class="brand"><div><h1>VietRestore</h1><p>Vietnam restoration opportunity explorer</p></div></div><span class="pill">In development</span></header>
 <main aria-label="Satellite map of Vietnam"><div id="map" tabindex="0" aria-label="Interactive satellite map. Use arrow keys to pan and plus or minus to zoom."></div><div id="map-status" class="map-status" role="status">Loading satellite imagery…</div><noscript><div class="map-status">Enable JavaScript to view the interactive map.</div></noscript></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://unpkg.com/esri-leaflet@3.0.15/dist/esri-leaflet.js" crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script>
 <script src="forest.js"></script>
+<script src="comparison.js"></script>
 <script>
 (function () {
   const status = document.getElementById('map-status');
@@ -37,7 +39,11 @@ body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidd
   });
   imagery.on('load', function () { if (!failed) status.hidden = true; });
   imagery.addTo(map);
-  addForestLayer(map);
+  map.createPane('nationalForest');
+  map.getPane('nationalForest').style.zIndex = 410;
+  const controls = L.control.layers(null, {}, {collapsed: false, position: 'topright'}).addTo(map);
+  addForestLayer(map, controls);
+  addComparisonLayers(map, controls);
   L.control.scale({imperial: false, position: 'bottomleft'}).addTo(map);
   new ResizeObserver(function () { map.invalidateSize(); }).observe(document.getElementById('map'));
 })();

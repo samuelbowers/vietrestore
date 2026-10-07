@@ -1,11 +1,11 @@
 /* One combined forest layer, rendered as canvas tiles in a worker. */
-async function addForestLayer(map) {
+async function addForestLayer(map, controls) {
   // VectorGrid 1.3 predates Leaflet 1.9; use the current event-stop helper.
   if (!L.DomEvent.fakeStop) L.DomEvent.fakeStop = L.DomEvent.stopPropagation;
   const message = document.createElement('div');
   message.className = 'map-status forest-status';
   message.setAttribute('role', 'status');
-  message.textContent = 'Loading forest types…';
+  message.textContent = 'Loading national forest classification…';
   document.querySelector('main').appendChild(message);
   try {
     const [styleResponse, dataResponse] = await Promise.all([
@@ -21,7 +21,7 @@ async function addForestLayer(map) {
         fillOpacity: 0.8, color: '#6e6e6e', opacity: 0.7, weight: zoom >= 14 ? 0.65 : 0.2};
     }
     const forest = L.vectorGrid.slicer(topology, {
-      rendererFactory: L.canvas.tile, interactive: true,
+      rendererFactory: L.canvas.tile, interactive: true, pane: 'nationalForest',
       vectorTileLayerStyles: {forest: style},
       getFeatureId: feature => feature.properties.id,
       maxZoom: 19, maxNativeZoom: 18, tolerance: 1, buffer: 64,
@@ -50,13 +50,13 @@ async function addForestLayer(map) {
     forest.on('mouseout', clearHover);
     forest.on('click', showType); // Tap support for touch devices.
     forest.on('remove', clearHover);
-    map.on('zoomstart movestart', clearHover);
+    map.on('zoomstart movestart classificationchange', clearHover);
     forest.once('load', () => { message.remove(); });
     forest.on('tileerror', () => { message.textContent = 'Forest tiles could not load. Please refresh the page.'; });
     forest.addTo(map);
-    L.control.layers(null, {'Forest types': forest}, {collapsed: false, position: 'topright'}).addTo(map);
+    controls.addOverlay(forest, 'National forest classification');
   } catch (error) {
-    message.textContent = 'Forest types could not load. Please refresh the page or try a current browser.';
+    message.textContent = 'National forest classification could not load. Please refresh the page or try a current browser.';
     console.error('Forest layer:', error);
   }
 }
