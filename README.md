@@ -2,17 +2,16 @@
 
 Vietnam restoration opportunity explorer.
 
-A responsive, dependency-free placeholder for a future GIS tool, hosted on GitHub Pages. The illustration is schematic: it is not a geographic dataset, satellite image, or restoration assessment. All data connections are pending.
+A full-window Leaflet satellite map centred on Vietnam, hosted on GitHub Pages. The original header is preserved. Pan, zoom, keyboard navigation and a metric scale are available. Restoration vector and raster layers will be added later.
 
-## Publish
+## Implementation
 
-Enable GitHub Pages under Settings → Pages → Deploy from a branch → main → / (root). The entry point is `index.html`; no build step is required.
+`index.html` is served directly from main by GitHub Pages, with no build step. Leaflet 1.9.4 and Esri Leaflet 3.0.15 load from unpkg. Satellite imagery uses Esri World Imagery; Esri Leaflet updates provider attribution as the view changes. Internet access is required. Loading and failure messages are included.
 
-## Future GIS implementation
+The current Esri BasemapLayer service is in mature support. For long-term production use, migrate to the current ArcGIS basemap service with an appropriately scoped API key and review its usage terms. No API keys or credentials are included.
 
-- Add a map renderer and an appropriately licensed satellite basemap with required attribution.
-- Convert large shapefile datasets into tiled web formats rather than loading entire shapefiles in the browser.
-- Serve the raster through raster tiles or a suitable cloud-optimized raster workflow.
-- Keep large spatial data separate from the small website repository, selecting hosting after dataset sizes and access requirements are known.
+## Future GIS layers
 
-No datasets, credentials, analytics, or external dependencies are included in this placeholder.
+- Convert large shapefiles into web-ready vector tiles rather than downloading entire shapefiles in the browser.
+- Serve raster data as raster tiles or through an appropriate cloud-optimized raster workflow.
+- Select data hosting after dataset sizes and access requirements are known; keep large data separate from this website repository.
