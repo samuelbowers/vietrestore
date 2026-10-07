@@ -1,0 +1,176 @@
+{
+  "featureCount": 61696,
+  "sources": [
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "features": 10761,
+      "sourceRecords": 10770
+    },
+    {
+      "source": "XA BEN GIANG SHP.shp",
+      "features": 21693,
+      "sourceRecords": 21693
+    },
+    {
+      "source": "LA EE RS.shp",
+      "features": 5437,
+      "sourceRecords": 5437
+    },
+    {
+      "source": "DAK PRING.shp",
+      "features": 8096,
+      "sourceRecords": 8096
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "features": 10004,
+      "sourceRecords": 10010
+    },
+    {
+      "source": "HT XA LA DE.shp",
+      "features": 5705,
+      "sourceRecords": 5706
+    }
+  ],
+  "categories": {
+    "TXN": 12394,
+    "DTK": 16543,
+    "TXB": 4692,
+    "DTTS": 11079,
+    "TXP": 485,
+    "TXK": 2634,
+    "TG": 8132,
+    "TN": 531,
+    "DTR": 3451,
+    "TXG": 1338,
+    "HG": 417
+  },
+  "repairedGeometries": 20,
+  "excludedDegenerateRecords": [
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 2,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 66,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 69,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 2050,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 10593,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 10606,
+      "reason": "No polygon area after geometry repair"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 10655,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 10664,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HTR XÃ NAM GIANG.shp",
+      "record": 10696,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 6166,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 6921,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 9667,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 9668,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 9697,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT THANH MY.shp",
+      "record": 9836,
+      "reason": "Null geometry"
+    },
+    {
+      "source": "HT XA LA DE.shp",
+      "record": 5649,
+      "reason": "Null geometry"
+    }
+  ],
+  "sourceCRS": "EPSG:5899",
+  "webCRS": "EPSG:4326",
+  "coordinateOperation": "EPSG:5899 to EPSG:4326, pyproj authoritative VN-2000 datum transformation; always_xy=True",
+  "renderableFeatureCount": 61659,
+  "collapsedAfterReprojection": [
+    12573,
+    12814,
+    12828,
+    13170,
+    13451,
+    13555,
+    13625,
+    13702,
+    13746,
+    13890,
+    13989,
+    14130,
+    14152,
+    14216,
+    14482,
+    14495,
+    14498,
+    14499,
+    14511,
+    14547,
+    14550,
+    14587,
+    14590,
+    14601,
+    14634,
+    14636,
+    14645,
+    14649,
+    14657,
+    14658,
+    14680,
+    14693,
+    14739,
+    14754,
+    14778,
+    14798,
+    15216
+  ],
+  "coordinateQuantization": "10,000,000 grid positions across the dataset bounds (less than 1 cm)",
+  "simplification": "No preprocessing simplification; zoom-dependent browser tile simplification only"
+}

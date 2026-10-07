@@ -1,0 +1,50 @@
+{
+  "DTK": {
+    "color": "#d9d9d9",
+    "label": "DTK — Other non-forest area"
+  },
+  "DTR": {
+    "color": "#cdeccf",
+    "label": "DTR — Planted forest area not yet meeting forest criteria"
+  },
+  "DTTS": {
+    "color": "#d9e86c",
+    "label": "DTTS — Area with natural regeneration"
+  },
+  "HG": {
+    "color": "#4faf8a",
+    "label": "HG — Mixed forest of timber trees and bamboo"
+  },
+  "TG": {
+    "color": "#71c66b",
+    "label": "TG — Planted timber forest"
+  },
+  "TN": {
+    "color": "#8ccb5e",
+    "label": "TN — Bamboo forest"
+  },
+  "TXB": {
+    "color": "#2e8b57",
+    "label": "TXB — Medium evergreen and semi-deciduous broadleaved forest"
+  },
+  "TXG": {
+    "color": "#0b5d2a",
+    "label": "TXG — Rich evergreen and semi-deciduous broadleaved forest"
+  },
+  "TXK": {
+    "color": "#b7c96b",
+    "label": "TXK — Very poor evergreen and semi-deciduous broadleaved forest"
+  },
+  "TXN": {
+    "color": "#76a95c",
+    "label": "TXN — Poor evergreen and semi-deciduous broadleaved forest"
+  },
+  "TXP": {
+    "color": "#d8d49a",
+    "label": "TXP — Evergreen and semi-deciduous broadleaved forest without growing stock"
+  },
+  "": {
+    "color": "#c8c8c8",
+    "label": "Forest type not recorded"
+  }
+}
