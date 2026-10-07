@@ -1,0 +1,77 @@
+{
+  "bounds": [
+    [
+      15.382985601711793,
+      107.24589170943074
+    ],
+    [
+      15.835030892722717,
+      107.88935362165611
+    ]
+  ],
+  "projectedBounds": [
+    11938558.05476439,
+    1733377.7615874803,
+    12010187.907178184,
+    1785626.274924585
+  ],
+  "width": 6889,
+  "height": 5025,
+  "sourceCRS": "EPSG:32648",
+  "sourceResolutionMetres": 10,
+  "resampling": "nearest",
+  "transparentValue": 255,
+  "classes": [
+    {
+      "value": 0,
+      "label": "Water",
+      "color": [
+        0,
+        197,
+        255
+      ]
+    },
+    {
+      "value": 1,
+      "label": "Trees",
+      "color": [
+        56,
+        168,
+        0
+      ]
+    },
+    {
+      "value": 2,
+      "label": "Shrubs/grasses",
+      "color": [
+        255,
+        255,
+        0
+      ]
+    },
+    {
+      "value": 3,
+      "label": "Non-vegetation",
+      "color": [
+        255,
+        43,
+        24
+      ]
+    }
+  ],
+  "restorationSources": [
+    {
+      "file": "DN_ARN_WO_ Plantation_2026.shp",
+      "count": 1
+    },
+    {
+      "file": "DN_ARN_W_ Plantation_2026.shp",
+      "count": 10
+    },
+    {
+      "file": "ST_ARN_WO_ Plantation_2026.shp",
+      "count": 7
+    }
+  ],
+  "restorationCount": 18
+}
