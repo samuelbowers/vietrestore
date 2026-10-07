@@ -3,35 +3,38 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VietRestore | Vietnam restoration opportunity explorer</title>
-<meta name="description" content="A future mapping tool for identifying restoration opportunities in Vietnam. Placeholder preview; spatial datasets are not yet connected.">
+<meta name="description" content="Explore Vietnam with an interactive satellite map. Restoration opportunity layers will be added as the project develops.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b493c'/%3E%3Cpath d='M8 23C6 10 15 7 25 7c0 12-6 19-14 15L23 9' fill='%23c3dfad' stroke='%231b493c'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
-:root{font-family:Arial,Helvetica,sans-serif;color:#233d34;background:#f4f5ef;font-synthesis:none}*{box-sizing:border-box}body{margin:0}header{height:90px;background:#fff;border-bottom:1px solid #dce3d9;display:flex;align-items:center;justify-content:space-between;padding:0 36px}.brand{display:flex;gap:13px;align-items:center}.mark{height:43px;width:43px;background:#214e40;border-radius:12px;display:grid;place-items:center;color:#d6e9b4;font-size:29px}.brand h1{font-size:24px;letter-spacing:-1px;margin:0 0 5px}.brand p{font-size:12px;margin:0;color:#65776d}.pill{font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 13px;border:1px solid #d5dfd2;border-radius:30px;white-space:nowrap}.pill:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#b68740;margin-right:8px}main{display:grid;grid-template-columns:310px 1fr;min-height:calc(100svh - 90px)}aside{padding:32px 26px;background:#fafbf7;border-right:1px solid #dce3d9;display:flex;flex-direction:column;gap:28px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:bold;color:#647d6b;text-transform:uppercase}h2{font-size:25px;letter-spacing:-.8px;line-height:1.22;font-weight:500;margin:12px 0}p{font-size:13px;line-height:1.7;color:#66766b}.divider{border-top:1px solid #dfe5da;padding-top:23px}h3{font-size:12px;font-weight:bold;margin:0 0 16px}.layer{display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #e6eade}.swatch{width:27px;height:27px;flex-shrink:0;border-radius:6px;display:grid;place-items:center;background:#e1e8d5;color:#59724d}.layer strong{display:block;font-size:12px;font-weight:500}.layer small{font-size:10px;color:#7d877c;display:block;margin-top:5px}.raster{background:repeating-linear-gradient(45deg,#e5dbbd,#e5dbbd 3px,#f0e9d4 3px,#f0e9d4 6px)}.note{margin-top:auto;background:#edf1e7;padding:16px;border-radius:8px}.note p{font-size:11px;margin:7px 0 0}.map{position:relative;overflow:hidden;min-height:640px;background:#e5ece6}.map-art{display:block;width:100%;height:100%;position:absolute;inset:0}.map-top{position:absolute;top:26px;left:28px;right:28px;display:flex;justify-content:space-between;gap:12px;align-items:start}.map-label{background:#ffffffeb;padding:13px 17px;border:1px solid #d8e1d5;border-radius:8px;font-size:12px;box-shadow:0 4px 12px #213e2c06}.compass{background:#ffffffc9;border-radius:30px;padding:10px 14px;font-size:11px;text-align:center}.compass span{display:block;margin-top:5px;font-size:16px}.empty{position:absolute;bottom:35px;left:28px;max-width:390px;background:#fffffff5;padding:25px 28px;border-radius:12px;box-shadow:0 8px 30px #283e2d0d;border:1px solid #d8e0d3}.empty h2{font-size:23px}.empty p{margin:10px 0 0;font-size:12px}.empty .eyebrow{display:flex;align-items:center;gap:9px}.empty .eyebrow:before{content:'';width:7px;height:7px;border-radius:50%;background:#8f9f6b}.map-foot{position:absolute;bottom:12px;right:20px;font-size:9px;color:#61736a;background:#e5ece6c9;padding:3px 5px}.country{font-size:14px;letter-spacing:5px;fill:#446554}.neighbor{font-size:10px;letter-spacing:4px;fill:#87978b}.sea{font-size:11px;letter-spacing:4px;fill:#92a79f;font-style:italic}@media(min-width:1500px){main{grid-template-columns:350px 1fr}aside{padding:38px}}@media(max-width:700px){header{height:auto;min-height:88px;padding:18px;gap:12px}.brand h1{font-size:22px}.brand p{max-width:185px;font-size:10px}.pill{font-size:8px;padding:8px}main{display:flex;flex-direction:column}.map{order:-1;min-height:560px}.map-top{left:18px;right:18px;top:18px}.empty{left:18px;right:18px;bottom:30px;max-width:350px;padding:20px}.empty h2{font-size:21px}aside{padding:25px;gap:20px}.map-foot{font-size:8px}aside>section:first-child{display:none}}
-</style>
-</head>
-<body>
+:root{font-family:Arial,Helvetica,sans-serif;color:#233d34;background:#f4f5ef;font-synthesis:none}*{box-sizing:border-box}body{margin:0}header{height:90px;background:#fff;border-bottom:1px solid #dce3d9;display:flex;align-items:center;justify-content:space-between;padding:0 36px}.brand{display:flex;gap:13px;align-items:center}.mark{height:43px;width:43px;background:#214e40;border-radius:12px;display:grid;place-items:center;color:#d6e9b4;font-size:29px}.brand h1{font-size:24px;letter-spacing:-1px;margin:0 0 5px}.brand p{font-size:12px;margin:0;color:#65776d}.pill{font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:10px 13px;border:1px solid #d5dfd2;border-radius:30px;white-space:nowrap}.pill:before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#b68740;margin-right:8px}
+body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}header{flex-shrink:0}main{flex:1;min-height:0;position:relative}#map{width:100%;height:100%;background:#203b36}.map-status{position:absolute;z-index:1000;top:16px;left:60px;right:16px;width:fit-content;max-width:calc(100% - 76px);padding:12px 16px;background:#fff;border-radius:8px;font-size:12px;box-shadow:0 2px 12px #0002}.map-status[hidden]{display:none}.leaflet-control-attribution{font-size:10px}.leaflet-container{font-family:Arial,Helvetica,sans-serif}.leaflet-bar a{color:#214e40}.leaflet-container:focus-visible{outline:3px solid #b6d997;outline-offset:-3px}@media(max-width:700px){header{height:auto;min-height:88px;padding:18px;gap:12px}.brand h1{font-size:22px}.brand p{max-width:185px;font-size:10px}.pill{font-size:8px;padding:8px}}
+</style></head><body>
 <header><div class="brand"><div class="mark" aria-hidden="true">↗</div><div><h1>VietRestore</h1><p>Vietnam restoration opportunity explorer</p></div></div><span class="pill">In development</span></header>
-<main><aside aria-label="Project and planned map layers">
-<section><span class="eyebrow">Landscape restoration</span><h2>Find the potential.<br>Plan the restoration.</h2><p>A spatial starting point for identifying restoration opportunities across Vietnam.</p></section>
-<section class="divider"><h3>Planned map layers</h3>
-<div class="layer"><span class="swatch" aria-hidden="true">▧</span><div><strong>Satellite basemap</strong><small>Imagery connection pending</small></div></div>
-<div class="layer"><span class="swatch" aria-hidden="true">◇</span><div><strong>Restoration opportunities</strong><small>Vector datasets · awaiting data</small></div></div>
-<div class="layer"><span class="swatch raster" aria-hidden="true"></span><div><strong>Raster analysis</strong><small>Raster dataset · awaiting data</small></div></div>
-</section>
-<section class="note"><span class="eyebrow">Project status</span><p>This is a placeholder. No restoration assessments or spatial datasets are displayed yet.</p></section>
-</aside>
-<section class="map" aria-label="Illustrative map placeholder for Vietnam">
-<svg class="map-art" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title map-desc"><title id="map-title">Vietnam map illustration</title><desc id="map-desc">Schematic illustration of Vietnam and its regional setting. This is decorative, not a geographic dataset or a satellite basemap.</desc>
-<defs><pattern id="grid" width="70" height="70" patternUnits="userSpaceOnUse"><path d="M70 0H0V70" fill="none" stroke="#cddbd0" stroke-width=".6"/></pattern><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0V8" stroke="#a5bb94" stroke-width="1"/></pattern><linearGradient id="land" x2="1" y2="1"><stop stop-color="#d7e0c5"/><stop offset="1" stop-color="#b8cc9e"/></linearGradient></defs>
-<rect width="1000" height="800" fill="#e4ede8"/><rect width="1000" height="800" fill="url(#grid)"/>
-<path d="M0 0H1000V50L820 65 715 116 642 123 603 182 580 224 596 264 571 279 568 344 608 415 650 477 670 544 669 601 636 650 581 680 537 696 505 674 490 624 423 596 348 610 276 651 204 663 131 619 80 665 0 644Z" fill="#dbe3d2"/>
-<path d="M348 0L400 123 385 187 419 239 436 296 429 352 472 408 485 484 454 547 423 596M0 467L116 445 201 482 286 467 351 505 454 547" fill="none" stroke="#c2ceb8" stroke-width="1.2" stroke-dasharray="6 5"/>
-<path d="M480 130L517 116 544 136 564 126 603 154 613 178 590 201 579 225 596 250 582 272 558 283 554 312 581 359 611 398 646 439 673 488 688 537 681 581 652 615 637 649 609 665 576 694 541 704 520 683 532 661 568 646 600 618 618 583 635 550 632 508 605 466 571 425 542 384 521 348 503 306 491 271 465 249 438 237 434 211 450 185 448 160Z" fill="url(#land)" stroke="#78966b" stroke-width="2" stroke-linejoin="round"/>
-<path d="M480 130L517 116 544 136 564 126 603 154 613 178 590 201 579 225 596 250 582 272 558 283 554 312 581 359 611 398 646 439 673 488 688 537 681 581 652 615 637 649 609 665 576 694 541 704 520 683 532 661 568 646 600 618 618 583 635 550 632 508 605 466 571 425 542 384 521 348 503 306 491 271 465 249 438 237 434 211 450 185 448 160Z" fill="url(#hatch)" opacity=".45"/>
-<text x="665" y="105" class="neighbor">CHINA</text><text x="347" y="329" class="neighbor">LAOS</text><text x="215" y="476" class="neighbor">THAILAND</text><text x="428" y="569" class="neighbor">CAMBODIA</text><text x="641" y="371" class="country">VIETNAM</text><path d="M623 379H593" stroke="#749063"/><text x="757" y="500" class="sea" transform="rotate(-65 757 500)">SOUTH CHINA SEA</text>
-</svg>
-<div class="map-top"><div class="map-label">Vietnam <span style="color:#8d9a8f;padding:0 8px">/</span> Overview</div><div class="compass" aria-hidden="true">N<span>↑</span></div></div>
-<div class="empty"><span class="eyebrow">The foundation is here</span><h2>A clearer view of<br>restoration opportunity.</h2><p>The interactive map is coming next. Satellite imagery, vector layers and raster analysis will bring Vietnam’s restoration landscape into focus.</p></div>
-<div class="map-foot">Schematic illustration only · Not for spatial analysis</div>
-</section></main>
-</body></html>
+<main aria-label="Satellite map of Vietnam"><div id="map" tabindex="0" aria-label="Interactive satellite map. Use arrow keys to pan and plus or minus to zoom."></div><div id="map-status" class="map-status" role="status">Loading satellite imagery…</div><noscript><div class="map-status">Enable JavaScript to view the interactive map.</div></noscript></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/esri-leaflet@3.0.15/dist/esri-leaflet.js" crossorigin=""></script>
+<script>
+(function () {
+  const status = document.getElementById('map-status');
+  if (!window.L || !L.esri) {
+    status.textContent = 'The map could not load. Check your connection and refresh the page.';
+    return;
+  }
+  const map = L.map('map', {minZoom: 2, maxZoom: 19, zoomSnap: 0.25});
+  map.fitBounds([[8.2, 102.1], [23.5, 109.6]], {padding: [24, 24]});
+  // Esri Leaflet manages imagery-provider attribution as the view changes.
+  const imagery = L.esri.basemapLayer('Imagery', {maxZoom: 19});
+  let failed = false;
+  imagery.on('loading', function () { failed = false; });
+  imagery.on('tileerror', function () {
+    failed = true;
+    status.hidden = false;
+    status.textContent = 'Some imagery could not load. Try another zoom level or refresh the page.';
+  });
+  imagery.on('load', function () { if (!failed) status.hidden = true; });
+  imagery.addTo(map);
+  L.control.scale({imperial: false, position: 'bottomleft'}).addTo(map);
+  new ResizeObserver(function () { map.invalidateSize(); }).observe(document.getElementById('map'));
+})();
+</script></body></html>
