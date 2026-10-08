@@ -12,57 +12,42 @@ async function addComparisonLayers(map, controls) {
     map.getPane('landcover').style.pointerEvents = 'none';
     map.createPane('restoration'); map.getPane('restoration').style.zIndex = 450;
     const restoration = L.geoJSON(areas, {
-      pane: 'restoration', bubblingMouseEvents: false,
+      pane: 'restoration', interactive: false,
       style: {color: '#ff45e1', weight: 3, opacity: 1, fillColor: '#ff45e1', fillOpacity: 0.08, className: 'restoration-area'},
-      onEachFeature(feature, layer) {
-        const text = document.createElement('span');
-        text.textContent = 'Restoration area selected in 2026 · ' + feature.properties.name;
-        layer.bindTooltip(text, {sticky: true, className: 'forest-tooltip'});
-        layer.on('click', () => layer.openTooltip());
-      }
+
     }).addTo(map);
     controls.addOverlay(restoration, 'Restoration areas · 2026');
     const raster = L.imageOverlay('data/sentinel2-landcover.png', metadata.bounds, {
       pane: 'landcover', opacity: 0.8, className: 'landcover-image', interactive: false,
       alt: 'Sentinel-2 classification: water, trees, shrubs/grasses, and non-vegetation'
     });
-    controls.addOverlay(raster, 'Sentinel-2 land cover');
-    const tooltip = L.tooltip({direction: 'auto', opacity: 1, className: 'forest-tooltip'});
-    const sampler = document.createElement('canvas'); sampler.width = sampler.height = 1;
-    const context = sampler.getContext('2d', {willReadFrequently: true});
-    context.imageSmoothingEnabled = false;
-    function close() { map.closeTooltip(tooltip); }
-    function identify(event) {
-      if (!map.hasLayer(raster)) return;
-      if (event.originalEvent?.target?.closest?.('.restoration-area')) { close(); return; }
-      const image = raster.getElement();
-      if (!image?.complete || !image.naturalWidth) return;
-      const point = L.CRS.EPSG3857.project(event.latlng);
-      const [left, bottom, right, top] = metadata.projectedBounds;
-      const x = Math.floor((point.x - left) / (right - left) * metadata.width);
-      const y = Math.floor((top - point.y) / (top - bottom) * metadata.height);
-      if (x < 0 || y < 0 || x >= metadata.width || y >= metadata.height) { close(); return; }
-      context.clearRect(0, 0, 1, 1);
-      context.drawImage(image, x, y, 1, 1, 0, 0, 1, 1);
-      const pixel = context.getImageData(0, 0, 1, 1).data;
-      if (!pixel[3]) { close(); return; }
-      const category = metadata.classes.find(c => c.color.every((v, i) => v === pixel[i]));
-      if (!category) { close(); return; }
-      const text = document.createElement('span'); text.textContent = 'Sentinel-2 · ' + category.label;
-      tooltip.setLatLng(event.latlng).setContent(text).addTo(map);
-    }
+    controls.addOverlay(raster, 'Sentinel-2 forest classification');
+    const legend = L.control({position: 'bottomright'});
+    legend.onAdd = function () {
+      const box = L.DomUtil.create('section', 'classification-legend');
+      box.setAttribute('aria-label', 'Sentinel-2 forest classification legend');
+      const title = document.createElement('strong');
+      title.textContent = 'Sentinel-2 forest classification'; box.appendChild(title);
+      metadata.classes.forEach(category => {
+        const row = document.createElement('div');
+        const swatch = document.createElement('span'); swatch.className = 'legend-swatch';
+        swatch.style.backgroundColor = 'rgb(' + category.color.join(',') + ')';
+        swatch.setAttribute('aria-hidden', 'true');
+        row.append(swatch, document.createTextNode(category.label)); box.appendChild(row);
+      });
+      L.DomEvent.disableClickPropagation(box); L.DomEvent.disableScrollPropagation(box);
+      return box;
+    };
     raster.on('add', () => {
-      map.getPane('nationalForest').style.pointerEvents = 'none';
+      legend.addTo(map);
+      map.getPane('nationalForest').classList.add('classification-obscured');
       map.fire('classificationchange');
-      status.textContent = 'Loading Sentinel-2 land cover…'; status.hidden = false;
+      status.textContent = 'Loading Sentinel-2 forest classification…'; status.hidden = false;
       if (raster.getElement()?.complete && raster.getElement().naturalWidth) status.hidden = true;
     });
     raster.on('load', () => { status.hidden = true; });
     raster.on('error', () => { status.hidden = false; status.textContent = 'Sentinel-2 imagery could not load. Toggle it off and on to retry.'; });
-    raster.on('remove', () => { map.getPane('nationalForest').style.pointerEvents = ''; close(); status.hidden = true; });
-    restoration.on('mouseover', close);
-    map.on('mousemove click', identify);
-    map.on('movestart zoomstart mouseout', close);
+    raster.on('remove', () => { map.getPane('nationalForest').classList.remove('classification-obscured'); legend.remove(); status.hidden = true; });
     status.hidden = true;
   } catch (error) {
     status.textContent = 'The restoration areas or land-cover data could not load. Please refresh the page.';

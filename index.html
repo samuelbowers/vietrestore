@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VietRestore | Vietnam restoration opportunity explorer</title>
+<title>Vietnam restoration opportunity explorer</title>
 <meta name="description" content="Explore Vietnam with an interactive satellite map. Restoration opportunity layers will be added as the project develops.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231b493c'/%3E%3Cpath d='M8 23C6 10 15 7 25 7c0 12-6 19-14 15L23 9' fill='%23c3dfad' stroke='%231b493c'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
@@ -11,8 +11,10 @@
 body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}header{flex-shrink:0}main{flex:1;min-height:0;position:relative}#map{width:100%;height:100%;background:#203b36}.map-status{position:absolute;z-index:1000;top:16px;left:60px;right:16px;width:fit-content;max-width:calc(100% - 76px);padding:12px 16px;background:#fff;border-radius:8px;font-size:12px;box-shadow:0 2px 12px #0002}.map-status[hidden]{display:none}.leaflet-control-attribution{font-size:10px}.leaflet-container{font-family:Arial,Helvetica,sans-serif}.leaflet-bar a{color:#214e40}.leaflet-container:focus-visible{outline:3px solid #b6d997;outline-offset:-3px}@media(max-width:700px){header{height:auto;min-height:88px;padding:18px;gap:12px}.brand h1{font-size:22px}.brand p{max-width:185px;font-size:10px}.pill{font-size:8px;padding:8px}}
 .forest-status{top:62px}.forest-tooltip{white-space:normal;max-width:min(300px,70vw);font-size:12px;line-height:1.5;padding:9px 12px;color:#233d34;border-radius:6px}.leaflet-control-layers{border:1px solid #d5dfd2!important;border-radius:8px!important;color:#233d34}.leaflet-control-layers label{padding:5px}
 .landcover-image{image-rendering:pixelated}.comparison-status{top:110px}.leaflet-control-layers{max-width:260px}.leaflet-control-layers label{font-size:12px}
+.brand h1{margin:0;letter-spacing:-.6px;line-height:1.2}.classification-legend{background:#fffffff2;border:1px solid #d5dfd2;border-radius:8px;padding:13px 15px;color:#233d34;font-size:12px;box-shadow:0 2px 10px #0001;max-width:260px}.classification-legend strong{display:block;font-size:12px;margin-bottom:10px}.classification-legend div{display:flex;align-items:center;gap:9px;margin-top:7px}.legend-swatch{width:15px;height:15px;border-radius:3px;border:1px solid #0002;flex:none}.leaflet-pane canvas.leaflet-interactive{cursor:grab}.leaflet-dragging .leaflet-pane canvas{cursor:grabbing}@media(max-width:700px){.brand h1{font-size:18px;max-width:250px}.pill{white-space:normal;text-align:center}}
+.classification-obscured canvas{pointer-events:none!important}
 </style></head><body>
-<header><div class="brand"><div><h1>VietRestore</h1><p>Vietnam restoration opportunity explorer</p></div></div><span class="pill">In development</span></header>
+<header><div class="brand"><div><h1>Vietnam restoration opportunity explorer</h1></div></div><span class="pill">In development</span></header>
 <main aria-label="Satellite map of Vietnam"><div id="map" tabindex="0" aria-label="Interactive satellite map. Use arrow keys to pan and plus or minus to zoom."></div><div id="map-status" class="map-status" role="status">Loading satellite imagery…</div><noscript><div class="map-status">Enable JavaScript to view the interactive map.</div></noscript></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="https://unpkg.com/esri-leaflet@3.0.15/dist/esri-leaflet.js" crossorigin=""></script>

@@ -2,6 +2,13 @@
 async function addForestLayer(map, controls) {
   // VectorGrid 1.3 predates Leaflet 1.9; use the current event-stop helper.
   if (!L.DomEvent.fakeStop) L.DomEvent.fakeStop = L.DomEvent.stopPropagation;
+  // Let press/release events reach Leaflet's map drag handler.
+  const DraggableTile = L.Canvas.Tile.extend({
+    _onClick(event) {
+      if (event.type === 'mousedown' || event.type === 'mouseup') return;
+      return L.Canvas.Tile.prototype._onClick.call(this, event);
+    }
+  });
   const message = document.createElement('div');
   message.className = 'map-status forest-status';
   message.setAttribute('role', 'status');
@@ -17,11 +24,13 @@ async function addForestLayer(map, controls) {
     const bounds = topology.bbox;
     map.fitBounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]], {padding: [24, 24], animate: false});
     function style(properties, zoom) {
-      return {fill: true, fillColor: (styles[properties.type] || styles['']).color,
-        fillOpacity: 0.8, color: '#6e6e6e', opacity: 0.7, weight: zoom >= 14 ? 0.65 : 0.2};
+      const eligible = properties.type === 'DTTS' || properties.type === 'DTK';
+      return {fill: true, fillColor: properties.type === 'DTK' ? '#e6d8b0' : (styles[properties.type] || styles['']).color,
+        fillOpacity: eligible ? 0.92 : 0.76, color: eligible ? '#8c794b' : '#6e6e6e',
+        opacity: eligible ? 0.85 : 0.65, weight: eligible ? (zoom >= 14 ? 1 : 0.45) : (zoom >= 14 ? 0.65 : 0.2)};
     }
     const forest = L.vectorGrid.slicer(topology, {
-      rendererFactory: L.canvas.tile, interactive: true, pane: 'nationalForest',
+      rendererFactory: (coords, size, options) => new DraggableTile(coords, size, options), interactive: true, pane: 'nationalForest',
       vectorTileLayerStyles: {forest: style},
       getFeatureId: feature => feature.properties.id,
       maxZoom: 19, maxNativeZoom: 18, tolerance: 1, buffer: 64,
