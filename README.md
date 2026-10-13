@@ -81,7 +81,10 @@ existing forest and comparison layers.
 
 The toolbar at the top left uses Leaflet.draw 1.0.4. Select the polygon icon,
 click/tap each corner, then select the first corner (or **Finish**) to complete
-the polygon. Orange polygons remain above the other map layers. The edit tool
+the polygon. Vermilion-red polygons (`#CC3311`, from the colourblind-friendly Tol vibrant
+palette) remain above the other map layers, with a thicker stroke and white halo
+for contrast over forest classifications and satellite imagery. KML downloads
+use the same red. The edit tool
 allows moving vertices; the delete tool removes selected drawings. **Save**
 commits edits/deletions and **Cancel** discards those changes. Self-intersecting
 polygons are blocked. Existing classification features remain unchanged.
