@@ -76,3 +76,26 @@ python scripts/build_dtts_areas.py
 
 `dtts-areas.js` implements the overlay and ranking control independently of the
 existing forest and comparison layers.
+
+## Draw and download polygons
+
+The toolbar at the top left uses Leaflet.draw 1.0.4. Select the polygon icon,
+click/tap each corner, then select the first corner (or **Finish**) to complete
+the polygon. Orange polygons remain above the other map layers. The edit tool
+allows moving vertices; the delete tool removes selected drawings. **Save**
+commits edits/deletions and **Cancel** discards those changes. Self-intersecting
+polygons are blocked. Existing classification features remain unchanged.
+
+The **Your polygons** panel downloads all completed drawings together as either
+a WGS84 GeoJSON FeatureCollection or KML document. Both formats preserve closed
+polygon rings, names and creation timestamps. KML uses longitude, latitude,
+altitude coordinates with ground-clamped polygons. Downloaded GeoJSON can be
+opened in QGIS and saved there as a GeoPackage. Export buttons are disabled while
+editing or deleting until those operations are saved or cancelled.
+
+Drawings are saved to localStorage on the same browser/origin after creation and
+saved edits/deletions and restored on reopening the map. They are not uploaded,
+shared between colleagues or stored in the repository. Clearing browser/site
+data removes them. If local saving is blocked or exceeds available space, the
+panel explains that downloads are needed to retain drawings. `drawing.js`
+implements persistence and export without additional export dependencies.
