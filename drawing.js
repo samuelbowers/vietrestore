@@ -28,7 +28,7 @@ function drawingsToKml(collection) {
   return '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>VietRestore drawings</name>' +
     '<Style id="drawing"><LineStyle><color>ff1133cc</color><width>4</width></LineStyle>' +
-    '<PolyStyle><color>4d1133cc</color></PolyStyle></Style>' + placemarks + '</Document></kml>\n';
+    '<PolyStyle><color>1a1133cc</color></PolyStyle></Style>' + placemarks + '</Document></kml>\n';
 }
 
 function addDrawingTools(map) {
@@ -45,7 +45,7 @@ function addDrawingTools(map) {
   const downloadButtons = [];
   let active = false, storageAvailable = true, sequence = 0;
   const shapeStyle = {pane: 'userDrawings', color: '#cc3311', weight: 4,
-    fillColor: '#cc3311', fillOpacity: 0.30, className: 'user-drawing'};
+    fillColor: '#cc3311', fillOpacity: 0.10, className: 'user-drawing'};
   map.createPane('userDrawings'); map.getPane('userDrawings').style.zIndex = 480;
   const drawings = L.featureGroup().addTo(map);
   function collection() { return drawings.toGeoJSON(false); }
