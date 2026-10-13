@@ -39,3 +39,40 @@ The supplied 10 m Sentinel-2 raster uses EPSG:32648. It is reprojected to EPSG:3
 The visible title is Vietnam restoration opportunity explorer, with no subtitle. Sentinel-2 forest classification has a four-class legend shown only while that raster is enabled; it has no pixel hover or tap tooltip. Hover/tap class labels are limited to the national forest vector layer, with vector interaction suppressed while the raster covers it. Restoration areas remain visible outlines without tooltips. DTTS and DTK have slightly stronger opacity and outlines; DTK uses muted sand to distinguish potential restoration areas. These category highlights are not an additional suitability analysis.
 
 A scoped Canvas.Tile subclass passes mousedown/mouseup through to map dragging rather than the legacy VectorGrid click handler. This fixes initial dragging over a polygon while preserving vector hover/tap identification.
+
+## Ten largest contiguous DTTS areas
+
+The **Largest DTTS areas · top 10** checkbox controls a cyan highlight layer,
+enabled initially. Numbered markers identify the areas by descending size. Click
+an outline to see its rank, area in hectares and number of source polygons. Expand
+**10 largest DTTS areas** at the bottom left to zoom to an individual area or all
+ten. This layer remains visible above either classification and below the 2026
+restoration outlines.
+
+The analysis uses only DTTS polygons from the published forest TopoJSON (including
+any lowercase `dtts`). Polygons belong to one connected area if they share an
+edge, touch at a vertex, or overlap; connectivity is transitive. No buffer or
+gap-closing tolerance is used. Disconnected parts of a multipart source record
+are analysed separately. Shapely repairs invalid parts before grouping. Area is
+the WGS84 ellipsoidal area of each dissolved union, excluding holes and counting
+overlaps once, rather than a sum of potentially overlapping record areas.
+
+The published data contains 11,077 drawable DTTS source features, yielding 11,098
+polygon parts and 5,138 connected areas; 13 input parts required geometry repair.
+The largest ten range from 494.3 ha to 117.6 ha (the eleventh is 108.9 ha). Ranking
+is within the six supplied datasets, not a nationwide inventory. The new layer
+follows the user's DTTS definition; the classification alone does not establish
+legal eligibility or other restoration suitability criteria.
+
+The GeoJSON is approximately 1 MB and retains full published geometry without
+further simplification. `data/dtts-largest-areas-metadata.json` records the source
+SHA-256, method, ranks, precise areas, bounds and contributing feature IDs. IDs
+are relative to this forest dataset version. Rebuild after replacing forest data:
+
+```sh
+python -m pip install -r scripts/requirements.txt
+python scripts/build_dtts_areas.py
+```
+
+`dtts-areas.js` implements the overlay and ranking control independently of the
+existing forest and comparison layers.
