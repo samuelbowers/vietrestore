@@ -16,6 +16,7 @@ body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidd
 .classification-obscured canvas{pointer-events:none!important}
 .user-drawing{filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1px #fff)}.drawing-panel{background:#fffffff2;border:1px solid #d5dfd2;border-radius:8px;padding:10px 12px;color:#233d34;font-size:12px;width:215px}.drawing-panel p{margin:8px 0;line-height:1.4}.drawing-panel .drawing-storage{font-size:11px;color:#65776d;margin-bottom:0}.drawing-downloads{display:flex;gap:6px}.drawing-downloads button{flex:1;border:1px solid #b7cfc5;border-radius:5px;background:#fff;color:#214e40;padding:7px;cursor:pointer;font:inherit;font-weight:bold}.drawing-downloads button:disabled{opacity:.45;cursor:default}.drawing-downloads button:focus-visible{outline:2px solid #006775}.drawing-active .leaflet-nationalForest-pane,.drawing-active .leaflet-dttsAreas-pane,.drawing-active .leaflet-dttsRanks-pane,.drawing-new .leaflet-userDrawings-pane{pointer-events:none!important}.drawing-active .leaflet-nationalForest-pane canvas{pointer-events:none!important}@media(max-width:700px){.drawing-panel{width:175px;padding:8px;font-size:11px}.drawing-panel p{margin:5px 0}}
 .dtts-status{top:158px}.dtts-rank{display:grid;place-items:center;border:2px solid #fff;border-radius:50%;background:#006775;color:#fff;font-size:12px;font-weight:bold;box-shadow:0 1px 5px #0008}.dtts-ranking{background:#fffffff2;border:1px solid #d5dfd2;border-radius:8px;padding:10px 12px;color:#233d34;font-size:12px;max-height:45vh;overflow:auto;min-width:185px}.dtts-ranking summary{cursor:pointer;font-weight:bold}.dtts-ranking button{display:block;width:100%;text-align:left;border:0;border-radius:4px;background:transparent;color:#233d34;padding:6px 4px;cursor:pointer;font:inherit}.dtts-ranking button:hover,.dtts-ranking button:focus-visible{background:#d9f5f7}.dtts-ranking summary:focus-visible{outline:2px solid #006775}
+.priority-status{top:204px}.priority-area-label{display:grid;place-items:center;background:#cc3311;color:#fff;border:2px solid #fff;border-radius:5px;font-size:15px;font-weight:bold;box-shadow:0 1px 5px #0008}.drawing-active .leaflet-examplePriority-pane,.drawing-active .leaflet-examplePriorityLabels-pane{pointer-events:none!important}
 </style></head><body>
 <header><div class="brand"><div><h1>Vietnam restoration opportunity explorer</h1></div></div><span class="pill">In development</span></header>
 <main aria-label="Satellite map of Vietnam"><div id="map" tabindex="0" aria-label="Interactive satellite map. Use arrow keys to pan and plus or minus to zoom."></div><div id="map-status" class="map-status" role="status">Loading satellite imagery…</div><noscript><div class="map-status">Enable JavaScript to view the interactive map.</div></noscript></main>
@@ -26,6 +27,7 @@ body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidd
 <script src="forest.js"></script>
 <script src="comparison.js"></script>
 <script src="dtts-areas.js"></script>
+<script src="priority-areas.js?v=20261015"></script>
 <script src="drawing.js?v=light-fill-20261013"></script>
 <script>
 (function () {
@@ -53,6 +55,7 @@ body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidd
   addForestLayer(map, controls);
   addComparisonLayers(map, controls);
   addLargestDttsAreas(map, controls);
+  addExamplePriorityAreas(map, controls);
   addDrawingTools(map);
   L.control.scale({imperial: false, position: 'bottomleft'}).addTo(map);
   new ResizeObserver(function () { map.invalidateSize(); }).observe(document.getElementById('map'));

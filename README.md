@@ -102,3 +102,28 @@ shared between colleagues or stored in the repository. Clearing browser/site
 data removes them. If local saving is blocked or exceeds available space, the
 panel explains that downloads are needed to retain drawings. `drawing.js`
 implements persistence and export without additional export dependencies.
+
+## Example restoration priority areas
+
+The **Example restoration priority areas** overlay displays the eight polygons
+supplied on 15 October 2026 as four illustrative clusters, numbered clockwise
+from the top left. It is enabled initially, uses the red outline/white halo and
+10% fill, and has one red square label per cluster. Click a label to zoom to
+the complete cluster; click an outline for its area and source polygon count.
+The **Example priority areas** control offers individual zoom buttons and
+**Show all four**. This shared overlay is separate from personal browser drawings
+and the ten largest contiguous DTTS areas.
+
+| Area | Position | Original source polygons |
+| --- | --- | --- |
+| 1 | Top left | Polygon 5, Polygon 6, Polygon 7 |
+| 2 | Top right | Polygon 1 |
+| 3 | Bottom right | Polygon 2, Polygon 3, Polygon 8 |
+| 4 | Bottom left | Polygon 10 |
+
+True overlaps are dissolved within each cluster, without buffering, snapping or
+simplification. Disconnected pieces remain parts of the same labelled area;
+the approximately 3.9 m gap between Polygon 6 and Polygon 7 is retained.
+Areas use WGS84 ellipsoidal union area, counting overlaps once. The accompanying
+metadata records the source fingerprint, grouping and method. These are examples
+selected by the user, rather than an exhaustive inventory or automatic ranking.
