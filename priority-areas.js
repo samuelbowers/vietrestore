@@ -15,7 +15,8 @@ async function addExamplePriorityAreas(map, controls) {
     map.getPane('examplePriorityLabels').style.zIndex = 470;
     const polygons = L.geoJSON(data, {
       pane: 'examplePriority',
-      style: {color: '#cc3311', weight: 4, fillColor: '#cc3311', fillOpacity: 0.10,
+      style: {color: '#6f4c9b', weight: 3, dashArray: '9 6', lineCap: 'butt',
+        fillColor: '#6f4c9b', fillOpacity: 0.04,
         className: 'user-drawing example-priority-area'},
       onEachFeature(feature, layer) {
         const p = feature.properties;
@@ -25,7 +26,7 @@ async function addExamplePriorityAreas(map, controls) {
         detail.textContent = p.area_ha.toLocaleString('en-GB', {maximumFractionDigits: 1}) +
           ' ha · ' + p.source_polygon_count + (p.source_polygon_count === 1 ? ' source polygon' : ' source polygons');
         const note = document.createElement('span');
-        note.textContent = 'Illustrative restoration priority area';
+        note.textContent = 'Suggested restoration area · illustrative example';
         content.append(title, detail, note);
         layer.bindPopup(content);
         layer.bindTooltip(p.name, {sticky: true});
@@ -53,6 +54,8 @@ async function addExamplePriorityAreas(map, controls) {
       const box = L.DomUtil.create('details', 'dtts-ranking priority-navigation');
       const summary = document.createElement('summary'); summary.textContent = 'Example priority areas';
       box.appendChild(summary);
+      const key = document.createElement('p'); key.className = 'priority-style-key';
+      key.textContent = 'Dashed purple outlines · suggested areas'; box.appendChild(key);
       const all = document.createElement('button'); all.type = 'button'; all.textContent = 'Show all four';
       all.addEventListener('click', () => map.fitBounds(polygons.getBounds(), {padding: [50, 50]}));
       box.appendChild(all);
@@ -67,7 +70,6 @@ async function addExamplePriorityAreas(map, controls) {
     };
     group.on('add', () => navigation.addTo(map));
     group.on('remove', () => { navigation.remove(); polygons.eachLayer(layer => layer.closePopup()); });
-    group.addTo(map);
     controls.addOverlay(group, 'Example restoration priority areas');
     status.remove();
   } catch (error) {

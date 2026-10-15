@@ -107,8 +107,9 @@ implements persistence and export without additional export dependencies.
 
 The **Example restoration priority areas** overlay displays the eight polygons
 supplied on 15 October 2026 as four illustrative clusters, numbered clockwise
-from the top left. It is enabled initially, uses the red outline/white halo and
-10% fill, and has one red square label per cluster. Click a label to zoom to
+from the top left. It is deselected initially, uses dashed purple outlines with
+a white halo and 4% fill, and has one white square label with a dashed purple
+border per cluster. The dashed style marks these as suggestions. Click a label to zoom to
 the complete cluster; click an outline for its area and source polygon count.
 The **Example priority areas** control offers individual zoom buttons and
 **Show all four**. This shared overlay is separate from personal browser drawings
